@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
-  <link href="http://yoursite.com/atom.xml" rel="self"/>
-  <link href="http://yoursite.com/"/>
-  <updated>2018-04-19T23:17:41+08:00</updated>
-  <id>http://yoursite.com/</id>
+  <title><![CDATA[六六博客]]></title>
+  <link href="http://lovyliu.github.io/atom.xml" rel="self"/>
+  <link href="http://lovyliu.github.io/"/>
+  <updated>2018-04-19T23:38:32+08:00</updated>
+  <id>http://lovyliu.github.io/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[Lovy]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
   
   <entry>
-    <title type="html"><![CDATA[Gulp]]></title>
-    <link href="http://yoursite.com/blog/2018/04/19/gulp/"/>
+    <title type="html"><![CDATA[gulp]]></title>
+    <link href="http://lovyliu.github.io/blog/2018/04/19/gulp/"/>
     <updated>2018-04-19T23:16:42+08:00</updated>
-    <id>http://yoursite.com/blog/2018/04/19/gulp</id>
+    <id>http://lovyliu.github.io/blog/2018/04/19/gulp</id>
     <content type="html"><![CDATA[<h1>Gulp! 一小时从入门到 <del>放&hellip;</del> 精通</h1>
 
 <h3>安装</h3>
