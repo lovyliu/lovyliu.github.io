@@ -5,15 +5,23 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Blog Archive - 六六博客</title>
+  <title>git_ssh_key - 六六博客</title>
   <meta name="author" content="Lovy">
 
   
-  <meta name="description" content=" Blog Archive 2018 git_ssh_key
-Apr 19 2018 js_binary
-Apr 19 2018 sass
-Apr 19 2018 gulp
-Apr 19 2018 Recent Posts git_ssh_key js_binary sass gulp ">
+  <meta name="description" content="管理电脑上的多个ssh key 为不同的网站（github、bitbucket、gitee）等：
+ssh-keygen -t rsa -C "yao.lu@sesamefin.com" 编辑~/.ssh/config文件 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+Host github. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -22,7 +30,7 @@ Apr 19 2018 Recent Posts git_ssh_key js_binary sass gulp ">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://lovyliu.github.io/blog/archives/">
+  <link rel="canonical" href="http://lovyliu.github.io/blog/2018/04/19/git-ssh-key/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -80,61 +88,107 @@ Apr 19 2018 Recent Posts git_ssh_key js_binary sass gulp ">
     <div id="main">
       <div id="content">
         <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Blog Archive</h1>
+    
+      <h1 class="entry-title">Git_ssh_key</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2018-04-19T23:47:08+08:00" pubdate data-updated="true"></time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives">
 
 
+<div class="entry-content"><h1>管理电脑上的多个ssh key</h1>
 
-  
-  <h2>2018</h2>
+<p>为不同的网站（github、bitbucket、gitee）等：
+<code>ssh-keygen -t rsa -C "yao.lu@sesamefin.com"</code></p>
 
-<article>
-  
-<h1><a href="/blog/2018/04/19/git-ssh-key/">git_ssh_key</a></h1>
-<time datetime="2018-04-19T23:47:08+08:00" pubdate><span class='month'>Apr</span> <span class='day'>19</span> <span class='year'>2018</span></time>
+<p>编辑<code>~/.ssh/config</code>文件</p>
 
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2018/04/19/js-binary/">js_binary</a></h1>
-<time datetime="2018-04-19T23:46:39+08:00" pubdate><span class='month'>Apr</span> <span class='day'>19</span> <span class='year'>2018</span></time>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2018/04/19/sass/">sass</a></h1>
-<time datetime="2018-04-19T23:45:06+08:00" pubdate><span class='month'>Apr</span> <span class='day'>19</span> <span class='year'>2018</span></time>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2018/04/19/gulp/">gulp</a></h1>
-<time datetime="2018-04-19T23:16:42+08:00" pubdate><span class='month'>Apr</span> <span class='day'>19</span> <span class='year'>2018</span></time>
-
-
-</article>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Host github.com
+</span><span class='line'>  HostName github.com
+</span><span class='line'>  IdentityFile ~/.ssh/id_rsa
+</span><span class='line'>  PreferredAuthentications publickey
+</span><span class='line'>  User 467097950@qq.com
+</span><span class='line'>
+</span><span class='line'>Host bitbucket.org
+</span><span class='line'>  HostName bitbucket.org
+</span><span class='line'>  IdentityFile ~/.ssh/id_rsa_sesame
+</span><span class='line'>  PreferredAuthentications publickey
+</span><span class='line'>  User yao.lu@sesamefin.com</span></code></pre></td></tr></table></div></figure>
 
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Lovy</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2018-04-19T23:47:08+08:00" pubdate data-updated="true"></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://lovyliu.github.io/blog/2018/04/19/git-ssh-key/" data-via="" data-counturl="http://lovyliu.github.io/blog/2018/04/19/git-ssh-key/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2018/04/19/js-binary/" title="Previous Post: js_binary">&laquo; js_binary</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
 </div>

@@ -1,0 +1,576 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>sass - 六六博客</title>
+  <meta name="author" content="Lovy">
+
+  
+  <meta name="description" content="sass 语法 1. 嵌套写法 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+.page{ .content{ . &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://lovyliu.github.io/blog/2018/04/19/sass/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="六六博客" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=Arvo:400,400italic,700,700italic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=Playball" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+    function addBlankTargetForLinks () {
+        $('a[href^="http"]').each(function(){
+            $(this).attr('target', '_blank');
+        });
+    }
+
+    $(document).bind('DOMNodeInserted', function(event) {
+        addBlankTargetForLinks();
+    });
+</script>
+
+  
+
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="/">六六博客</a></h1>
+  
+</hgroup>
+
+</header>
+  <div id="navigation">
+    <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:lovyliu.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  </div>
+  <div id="body"  >
+    <div id="main">
+      <div id="content">
+        <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Sass</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2018-04-19T23:45:06+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h1>sass 语法</h1>
+
+<h3>1. 嵌套写法</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.page</span><span class="p">{</span>
+</span><span class='line'>    <span class="o">.</span><span class="k">content</span><span class="err">{</span>
+</span><span class='line'>        <span class="o">.</span><span class="k">left-side</span><span class="err">{</span>
+</span><span class='line'>            <span class="o">.</span><span class="n">profile</span><span class="err">{</span>
+</span><span class='line'>                <span class="o">.</span><span class="n">name</span><span class="err">{</span>
+</span><span class='line'>                    <span class="k">font-size</span><span class="o">:</span> <span class="m">2</span><span class="n">rem</span><span class="p">;</span>
+</span><span class='line'>                <span class="p">}</span>
+</span><span class='line'>                <span class="nc">.age</span><span class="p">{</span>
+</span><span class='line'>                    <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+</span><span class='line'>                <span class="p">}</span>
+</span><span class='line'>            <span class="err">}</span>
+</span><span class='line'>        <span class="err">}</span>
+</span><span class='line'>    <span class="err">}</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">/* SCSS 中还可以进行属性嵌套 */</span>
+</span><span class='line'><span class="nc">.item-border</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">border</span><span class="o">:</span> <span class="err">{</span>
+</span><span class='line'>        <span class="n">style</span><span class="o">:</span> <span class="k">solid</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">left</span><span class="o">:</span> <span class="err">{</span>
+</span><span class='line'>            <span class="k">width</span><span class="o">:</span> <span class="m">1px</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>        <span class="nt">right</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>            <span class="k">width</span><span class="o">:</span> <span class="m">2px</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="err">}</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">/* SCSS 对父选择器的引用 */</span>
+</span><span class='line'><span class="nc">.btn</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">color</span><span class="o">:</span> <span class="m">#ccc</span><span class="p">;</span>
+</span><span class='line'>    <span class="o">&amp;:</span><span class="n">hover</span> <span class="err">{</span>
+</span><span class='line'>        <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="o">&amp;</span><span class="nd">:visited</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>2. 把属性值定义成变量（可复用）</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="k">@success-color</span><span class="o">:</span> <span class="nf">#ccc</span><span class="p">;</span>
+</span><span class='line'><span class="nc">.success-bg</span><span class="p">{</span>
+</span><span class='line'>  <span class="k">background</span><span class="o">:</span> <span class="err">$</span><span class="n">success</span><span class="o">-</span><span class="k">color</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">/* SCSS 可以使用+,-,*,/,%等数学操作符。并且如果变量是带单位的，例如px，也可以正确的进行运算 */</span>
+</span><span class='line'><span class="nf">#navbar</span> <span class="p">{</span>
+</span><span class='line'>    <span class="err">$</span><span class="n">navbar</span><span class="o">-</span><span class="k">width</span><span class="o">:</span> <span class="m">800px</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="err">$</span><span class="n">navbar</span><span class="o">-</span><span class="k">width</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">/* 使用#{}符号可以将变量查到属性名，或者选择器中 */</span>
+</span><span class='line'><span class="o">$</span><span class="nt">side</span><span class="o">:</span> <span class="nt">top</span><span class="o">;</span>
+</span><span class='line'><span class="o">$</span><span class="nt">radius</span><span class="o">:</span> <span class="nt">10px</span><span class="o">;</span>
+</span><span class='line'><span class="nc">.round-</span><span class="err">#</span><span class="p">{</span><span class="err">$</span><span class="n">side</span><span class="p">}</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">border</span><span class="o">-</span><span class="err">#{$</span><span class="n">side</span><span class="p">}</span><span class="nt">-radius</span><span class="o">:</span> <span class="o">$</span><span class="nt">radius</span><span class="o">;</span>
+</span><span class='line'>    <span class="nt">-moz-border-</span><span class="err">#</span><span class="p">{</span><span class="err">$</span><span class="n">side</span><span class="p">}</span><span class="nt">-radius</span><span class="o">:</span> <span class="o">$</span><span class="nt">radius</span><span class="o">;</span>
+</span><span class='line'>    <span class="nt">-webkit-border-</span><span class="err">#</span><span class="p">{</span><span class="err">$</span><span class="n">side</span><span class="p">}</span><span class="nt">-radiux</span><span class="o">:</span> <span class="o">$</span><span class="nt">radius</span><span class="o">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>3. 文件引入</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="k">@import</span> <span class="s2">&quot;common&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;popup&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="o">...</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>4. mixin</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="k">@mixin</span> <span class="nt">grey-border-radius</span><span class="p">{</span>
+</span><span class='line'>    <span class="nt">border</span><span class="o">:</span> <span class="nt">1px</span> <span class="nt">solid</span> <span class="nf">#e3e3e3</span><span class="o">;</span>
+</span><span class='line'>    <span class="nt">border-radius</span><span class="o">:</span> <span class="nt">2px</span><span class="o">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.description</span><span class="p">{</span>
+</span><span class='line'>    <span class="o">@</span><span class="n">include</span> <span class="n">grey</span><span class="o">-</span><span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.article</span><span class="p">{</span>
+</span><span class='line'>    <span class="o">@</span><span class="n">include</span> <span class="n">grey</span><span class="o">-</span><span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">color</span><span class="o">:</span> <span class="m">#444</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">/* mixin 可以传参数，并且可以给参数设置默认值*/</span>
+</span><span class='line'><span class="k">@mixin</span> <span class="nt">round</span><span class="o">($</span><span class="nt">side</span><span class="o">,</span> <span class="o">$</span><span class="nt">radius</span><span class="o">:</span> <span class="nt">10px</span><span class="o">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nt">border-</span><span class="err">#</span><span class="p">{</span><span class="err">$</span><span class="n">side</span><span class="p">}</span><span class="nt">-radius</span><span class="o">:</span> <span class="o">$</span><span class="nt">radius</span><span class="o">;</span>
+</span><span class='line'>    <span class="nt">-moz-border-</span><span class="err">#</span><span class="p">{</span><span class="err">$</span><span class="n">side</span><span class="p">}</span><span class="nt">-radius</span><span class="o">:</span> <span class="o">$</span><span class="nt">radius</span><span class="o">;</span>
+</span><span class='line'>    <span class="nt">-webkit-border-</span><span class="err">#</span><span class="p">{</span><span class="err">$</span><span class="n">side</span><span class="p">}</span><span class="nt">-radiux</span><span class="o">:</span> <span class="o">$</span><span class="nt">radius</span><span class="o">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nf">#navbar</span> <span class="nt">li</span> <span class="p">{</span>
+</span><span class='line'>    <span class="o">@</span><span class="n">include</span> <span class="n">round</span><span class="p">(</span><span class="k">top</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nf">#footer</span> <span class="p">{</span>
+</span><span class='line'>    <span class="o">@</span><span class="n">include</span> <span class="n">round</span><span class="p">(</span><span class="k">top</span><span class="o">,</span> <span class="m">5px</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>5. 继承</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.base-nav</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.new-nav</span> <span class="p">{</span>
+</span><span class='line'>    <span class="o">@</span><span class="n">extend</span> <span class="o">.</span><span class="n">base</span><span class="o">-</span><span class="n">nav</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">text-align</span><span class="o">:</span> <span class="k">center</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>6. 控制语句</h3>
+
+<p><code>@if</code> <code>@else</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">$</span><span class="nt">navbar-width</span><span class="o">:</span> <span class="nt">800px</span><span class="o">;</span>
+</span><span class='line'><span class="o">$</span><span class="nt">item</span><span class="o">:</span> <span class="nt">5</span><span class="o">;</span>
+</span><span class='line'><span class="nt">p</span> <span class="p">{</span>
+</span><span class='line'>    <span class="o">@</span><span class="n">if</span> <span class="err">$</span><span class="n">navbar</span><span class="o">-</span><span class="k">width</span><span class="o">/</span><span class="err">$</span><span class="n">item</span> <span class="o">-</span> <span class="m">10px</span> <span class="o">==</span> <span class="m">200</span> <span class="err">{</span> <span class="k">border</span><span class="o">:</span> <span class="m">2px</span> <span class="k">dotted</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">@else</span> <span class="p">{</span> <span class="nt">border</span><span class="o">:</span> <span class="nt">1px</span> <span class="nt">solid</span><span class="o">;</span> <span class="p">}</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>@for</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="k">@for</span> <span class="o">$</span><span class="nt">i</span> <span class="nt">from</span> <span class="nt">1</span> <span class="nt">to</span> <span class="nt">5</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nc">.border-</span><span class="err">#</span><span class="p">{</span><span class="err">$</span><span class="n">i</span><span class="p">}</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">border</span><span class="o">:</span> <span class="err">#{$</span><span class="n">i</span><span class="p">}</span><span class="nt">px</span> <span class="nt">solid</span> <span class="nt">blue</span><span class="o">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>@while</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">$</span><span class="nt">i</span><span class="o">:</span> <span class="nt">1</span><span class="o">;</span>
+</span><span class='line'><span class="k">@while</span> <span class="o">$</span><span class="nt">i</span> <span class="o">&lt;</span> <span class="nt">5</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nc">.border-</span><span class="err">#</span><span class="p">{</span><span class="err">$</span><span class="n">i</span><span class="p">}{</span><span class="k">border</span><span class="o">:</span> <span class="err">#{$</span><span class="n">i</span><span class="p">}</span><span class="nt">px</span> <span class="nt">solid</span> <span class="nt">blue</span><span class="o">;</span> <span class="p">}</span>
+</span><span class='line'>    <span class="o">$</span><span class="nt">i</span><span class="o">:</span> <span class="o">$</span><span class="nt">i</span> <span class="o">+</span> <span class="nt">1</span><span class="o">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>@each</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">$</span><span class="nt">i</span><span class="o">:</span> <span class="nt">1</span><span class="o">;</span>
+</span><span class='line'><span class="k">@each</span> <span class="o">$</span><span class="nt">item</span> <span class="nt">in</span> <span class="nt">add</span><span class="o">,</span> <span class="nt">update</span><span class="o">,</span> <span class="nt">remove</span><span class="o">,</span> <span class="nt">share</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nc">.icon-</span><span class="err">#</span><span class="p">{</span><span class="err">$</span><span class="n">item</span><span class="p">}</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">background-image</span><span class="o">:</span> <span class="sx">url(&quot;/image/#{$item}.jpg&quot;)</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>7. 自定义函数</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='CSS'><span class='line'><span class="k">@function</span> <span class="nt">double</span><span class="o">($</span><span class="nt">n</span><span class="o">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">@return</span> <span class="o">$</span><span class="nt">n</span> <span class="o">*</span> <span class="nt">2</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nf">#navbar</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="k">double</span><span class="p">(</span><span class="m">5px</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>参考链接</h4>
+
+<ul>
+<li><a href="http://sass-lang.com/">sass 官网</a></li>
+<li><a href="https://juejin.im/entry/5a44404a51882560b6529af0">前端CSS的工程化——掌握Sass这四大特性就够了</a></li>
+<li><a href="http://www.imbeta.cn/sassyong-fa-jie-shao.html#sassyong-fa-jie-shao">SASS用法介绍</a></li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Lovy</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2018-04-19T23:45:06+08:00" pubdate data-updated="true"></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://lovyliu.github.io/blog/2018/04/19/sass/" data-via="" data-counturl="http://lovyliu.github.io/blog/2018/04/19/sass/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2018/04/19/gulp/" title="Previous Post: gulp">&laquo; gulp</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2018/04/19/js-binary/" title="Next Post: js_binary">js_binary &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2018/04/19/git-ssh-key/">git_ssh_key</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2018/04/19/js-binary/">js_binary</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2018/04/19/sass/">sass</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2018/04/19/gulp/">gulp</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+      </div>
+    </div>
+    <footer role="contentinfo"><p>
+  Copyright &copy; 2018 - Lovy -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a>. Design by <a href="http://octopressthemes.com">Octopress Themes</a></span>
+</p>
+
+</footer>
+    
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+  </div>
+</body>
+</html>

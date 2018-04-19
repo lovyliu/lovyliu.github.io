@@ -4,7 +4,7 @@
   <title><![CDATA[六六博客]]></title>
   <link href="http://lovyliu.github.io/atom.xml" rel="self"/>
   <link href="http://lovyliu.github.io/"/>
-  <updated>2018-04-19T23:38:32+08:00</updated>
+  <updated>2018-04-19T23:56:41+08:00</updated>
   <id>http://lovyliu.github.io/</id>
   <author>
     <name><![CDATA[Lovy]]></name>
@@ -12,6 +12,419 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[git_ssh_key]]></title>
+    <link href="http://lovyliu.github.io/blog/2018/04/19/git-ssh-key/"/>
+    <updated>2018-04-19T23:47:08+08:00</updated>
+    <id>http://lovyliu.github.io/blog/2018/04/19/git-ssh-key</id>
+    <content type="html"><![CDATA[<h1>管理电脑上的多个ssh key</h1>
+
+<p>为不同的网站（github、bitbucket、gitee）等：
+<code>ssh-keygen -t rsa -C "yao.lu@sesamefin.com"</code></p>
+
+<p>编辑<code>~/.ssh/config</code>文件</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Host github.com
+</span><span class='line'>  HostName github.com
+</span><span class='line'>  IdentityFile ~/.ssh/id_rsa
+</span><span class='line'>  PreferredAuthentications publickey
+</span><span class='line'>  User 467097950@qq.com
+</span><span class='line'>
+</span><span class='line'>Host bitbucket.org
+</span><span class='line'>  HostName bitbucket.org
+</span><span class='line'>  IdentityFile ~/.ssh/id_rsa_sesame
+</span><span class='line'>  PreferredAuthentications publickey
+</span><span class='line'>  User yao.lu@sesamefin.com</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[js_binary]]></title>
+    <link href="http://lovyliu.github.io/blog/2018/04/19/js-binary/"/>
+    <updated>2018-04-19T23:46:39+08:00</updated>
+    <id>http://lovyliu.github.io/blog/2018/04/19/js-binary</id>
+    <content type="html"><![CDATA[<h1>Javascript 中的二进制操作</h1>
+
+<p>ECMAScrept中，所有的数值都以64位格式存储，但位操作符并不直接操作64位的值，而是先将64位的值转换成32位的整数，执行操作后再转回64位。因此看起来就像是只存在32位的整数一样。
+32位中，前31位用于表示整数的值，第32位是符号位。0代表正数，1代表负数。
+负数的存储形式是二进制补码。
+求反码过程：
+1. 求这个数的绝对值的二进制码。
+2. 求二进制反码（按位取反）。
+3. 反码+1。</p>
+
+<h3>按位非 ～（返回数值的反码）</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='Javascript'><span class='line'><span class="kd">var</span> <span class="nx">num1</span> <span class="o">=</span> <span class="mi">25</span><span class="p">;</span>          <span class="c1">// 00000000000000000000000000011001</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">num2</span> <span class="o">=</span> <span class="o">~</span><span class="nx">num1</span><span class="p">;</span>  <span class="c1">//  11111111111111111111111111100110</span>
+</span><span class='line'><span class="nx">alert</span><span class="p">(</span><span class="nx">num2</span><span class="p">);</span> <span class="c1">// -26</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>按位非本质是：操作数的负值-1。</p>
+
+<p>使用二进制操作是最底层的操作，速度更快。</p>
+
+<h3>按位与 <code>&amp;</code></h3>
+
+<h3>按位或 <code>|</code></h3>
+
+<h3>按位异或 <code>^</code></h3>
+
+<h3>左移 <code>&lt;&lt;</code> 所有位向左移动指定的位数，多出的空位用0填补。</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='Javascript'><span class='line'><span class="mi">2</span> <span class="o">&lt;&lt;</span> <span class="mi">5</span> <span class="c1">// 64  二进制10 -&gt; 1000000</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>相当于除以2的n次方，n为左移数</p>
+
+<h3>有符号的右移 >> 数值向右移动指定的位数，保留符号位，多出的空位用符号位的值填补</h3>
+
+<p>相当于乘以2的n次方，n为右移数</p>
+
+<h3>无符号的右移 <code>&gt;&gt;&gt;</code> 所有位右移指定位数</h3>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[sass]]></title>
+    <link href="http://lovyliu.github.io/blog/2018/04/19/sass/"/>
+    <updated>2018-04-19T23:45:06+08:00</updated>
+    <id>http://lovyliu.github.io/blog/2018/04/19/sass</id>
+    <content type="html"><![CDATA[<h1>sass 语法</h1>
+
+<h3>1. 嵌套写法</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.page</span><span class="p">{</span>
+</span><span class='line'>    <span class="o">.</span><span class="k">content</span><span class="err">{</span>
+</span><span class='line'>        <span class="o">.</span><span class="k">left-side</span><span class="err">{</span>
+</span><span class='line'>            <span class="o">.</span><span class="n">profile</span><span class="err">{</span>
+</span><span class='line'>                <span class="o">.</span><span class="n">name</span><span class="err">{</span>
+</span><span class='line'>                    <span class="k">font-size</span><span class="o">:</span> <span class="m">2</span><span class="n">rem</span><span class="p">;</span>
+</span><span class='line'>                <span class="p">}</span>
+</span><span class='line'>                <span class="nc">.age</span><span class="p">{</span>
+</span><span class='line'>                    <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+</span><span class='line'>                <span class="p">}</span>
+</span><span class='line'>            <span class="err">}</span>
+</span><span class='line'>        <span class="err">}</span>
+</span><span class='line'>    <span class="err">}</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">/* SCSS 中还可以进行属性嵌套 */</span>
+</span><span class='line'><span class="nc">.item-border</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">border</span><span class="o">:</span> <span class="err">{</span>
+</span><span class='line'>        <span class="n">style</span><span class="o">:</span> <span class="k">solid</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">left</span><span class="o">:</span> <span class="err">{</span>
+</span><span class='line'>            <span class="k">width</span><span class="o">:</span> <span class="m">1px</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>        <span class="nt">right</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>            <span class="k">width</span><span class="o">:</span> <span class="m">2px</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="err">}</span>
+</span><span class='line'><span class="err">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">/* SCSS 对父选择器的引用 */</span>
+</span><span class='line'><span class="nc">.btn</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">color</span><span class="o">:</span> <span class="m">#ccc</span><span class="p">;</span>
+</span><span class='line'>    <span class="o">&amp;:</span><span class="n">hover</span> <span class="err">{</span>
+</span><span class='line'>        <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="o">&amp;</span><span class="nd">:visited</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">color</span><span class="o">:</span> <span class="nb">blue</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>2. 把属性值定义成变量（可复用）</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="k">@success-color</span><span class="o">:</span> <span class="nf">#ccc</span><span class="p">;</span>
+</span><span class='line'><span class="nc">.success-bg</span><span class="p">{</span>
+</span><span class='line'>  <span class="k">background</span><span class="o">:</span> <span class="err">$</span><span class="n">success</span><span class="o">-</span><span class="k">color</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">/* SCSS 可以使用+,-,*,/,%等数学操作符。并且如果变量是带单位的，例如px，也可以正确的进行运算 */</span>
+</span><span class='line'><span class="nf">#navbar</span> <span class="p">{</span>
+</span><span class='line'>    <span class="err">$</span><span class="n">navbar</span><span class="o">-</span><span class="k">width</span><span class="o">:</span> <span class="m">800px</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="err">$</span><span class="n">navbar</span><span class="o">-</span><span class="k">width</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">/* 使用#{}符号可以将变量查到属性名，或者选择器中 */</span>
+</span><span class='line'><span class="o">$</span><span class="nt">side</span><span class="o">:</span> <span class="nt">top</span><span class="o">;</span>
+</span><span class='line'><span class="o">$</span><span class="nt">radius</span><span class="o">:</span> <span class="nt">10px</span><span class="o">;</span>
+</span><span class='line'><span class="nc">.round-</span><span class="err">#</span><span class="p">{</span><span class="err">$</span><span class="n">side</span><span class="p">}</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">border</span><span class="o">-</span><span class="err">#{$</span><span class="n">side</span><span class="p">}</span><span class="nt">-radius</span><span class="o">:</span> <span class="o">$</span><span class="nt">radius</span><span class="o">;</span>
+</span><span class='line'>    <span class="nt">-moz-border-</span><span class="err">#</span><span class="p">{</span><span class="err">$</span><span class="n">side</span><span class="p">}</span><span class="nt">-radius</span><span class="o">:</span> <span class="o">$</span><span class="nt">radius</span><span class="o">;</span>
+</span><span class='line'>    <span class="nt">-webkit-border-</span><span class="err">#</span><span class="p">{</span><span class="err">$</span><span class="n">side</span><span class="p">}</span><span class="nt">-radiux</span><span class="o">:</span> <span class="o">$</span><span class="nt">radius</span><span class="o">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>3. 文件引入</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="k">@import</span> <span class="s2">&quot;common&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;popup&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="o">...</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>4. mixin</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="k">@mixin</span> <span class="nt">grey-border-radius</span><span class="p">{</span>
+</span><span class='line'>    <span class="nt">border</span><span class="o">:</span> <span class="nt">1px</span> <span class="nt">solid</span> <span class="nf">#e3e3e3</span><span class="o">;</span>
+</span><span class='line'>    <span class="nt">border-radius</span><span class="o">:</span> <span class="nt">2px</span><span class="o">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.description</span><span class="p">{</span>
+</span><span class='line'>    <span class="o">@</span><span class="n">include</span> <span class="n">grey</span><span class="o">-</span><span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.article</span><span class="p">{</span>
+</span><span class='line'>    <span class="o">@</span><span class="n">include</span> <span class="n">grey</span><span class="o">-</span><span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">color</span><span class="o">:</span> <span class="m">#444</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">/* mixin 可以传参数，并且可以给参数设置默认值*/</span>
+</span><span class='line'><span class="k">@mixin</span> <span class="nt">round</span><span class="o">($</span><span class="nt">side</span><span class="o">,</span> <span class="o">$</span><span class="nt">radius</span><span class="o">:</span> <span class="nt">10px</span><span class="o">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nt">border-</span><span class="err">#</span><span class="p">{</span><span class="err">$</span><span class="n">side</span><span class="p">}</span><span class="nt">-radius</span><span class="o">:</span> <span class="o">$</span><span class="nt">radius</span><span class="o">;</span>
+</span><span class='line'>    <span class="nt">-moz-border-</span><span class="err">#</span><span class="p">{</span><span class="err">$</span><span class="n">side</span><span class="p">}</span><span class="nt">-radius</span><span class="o">:</span> <span class="o">$</span><span class="nt">radius</span><span class="o">;</span>
+</span><span class='line'>    <span class="nt">-webkit-border-</span><span class="err">#</span><span class="p">{</span><span class="err">$</span><span class="n">side</span><span class="p">}</span><span class="nt">-radiux</span><span class="o">:</span> <span class="o">$</span><span class="nt">radius</span><span class="o">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nf">#navbar</span> <span class="nt">li</span> <span class="p">{</span>
+</span><span class='line'>    <span class="o">@</span><span class="n">include</span> <span class="n">round</span><span class="p">(</span><span class="k">top</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nf">#footer</span> <span class="p">{</span>
+</span><span class='line'>    <span class="o">@</span><span class="n">include</span> <span class="n">round</span><span class="p">(</span><span class="k">top</span><span class="o">,</span> <span class="m">5px</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>5. 继承</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.base-nav</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nc">.new-nav</span> <span class="p">{</span>
+</span><span class='line'>    <span class="o">@</span><span class="n">extend</span> <span class="o">.</span><span class="n">base</span><span class="o">-</span><span class="n">nav</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">text-align</span><span class="o">:</span> <span class="k">center</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>6. 控制语句</h3>
+
+<p><code>@if</code> <code>@else</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">$</span><span class="nt">navbar-width</span><span class="o">:</span> <span class="nt">800px</span><span class="o">;</span>
+</span><span class='line'><span class="o">$</span><span class="nt">item</span><span class="o">:</span> <span class="nt">5</span><span class="o">;</span>
+</span><span class='line'><span class="nt">p</span> <span class="p">{</span>
+</span><span class='line'>    <span class="o">@</span><span class="n">if</span> <span class="err">$</span><span class="n">navbar</span><span class="o">-</span><span class="k">width</span><span class="o">/</span><span class="err">$</span><span class="n">item</span> <span class="o">-</span> <span class="m">10px</span> <span class="o">==</span> <span class="m">200</span> <span class="err">{</span> <span class="k">border</span><span class="o">:</span> <span class="m">2px</span> <span class="k">dotted</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">@else</span> <span class="p">{</span> <span class="nt">border</span><span class="o">:</span> <span class="nt">1px</span> <span class="nt">solid</span><span class="o">;</span> <span class="p">}</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>@for</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="k">@for</span> <span class="o">$</span><span class="nt">i</span> <span class="nt">from</span> <span class="nt">1</span> <span class="nt">to</span> <span class="nt">5</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nc">.border-</span><span class="err">#</span><span class="p">{</span><span class="err">$</span><span class="n">i</span><span class="p">}</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">border</span><span class="o">:</span> <span class="err">#{$</span><span class="n">i</span><span class="p">}</span><span class="nt">px</span> <span class="nt">solid</span> <span class="nt">blue</span><span class="o">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>@while</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">$</span><span class="nt">i</span><span class="o">:</span> <span class="nt">1</span><span class="o">;</span>
+</span><span class='line'><span class="k">@while</span> <span class="o">$</span><span class="nt">i</span> <span class="o">&lt;</span> <span class="nt">5</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nc">.border-</span><span class="err">#</span><span class="p">{</span><span class="err">$</span><span class="n">i</span><span class="p">}{</span><span class="k">border</span><span class="o">:</span> <span class="err">#{$</span><span class="n">i</span><span class="p">}</span><span class="nt">px</span> <span class="nt">solid</span> <span class="nt">blue</span><span class="o">;</span> <span class="p">}</span>
+</span><span class='line'>    <span class="o">$</span><span class="nt">i</span><span class="o">:</span> <span class="o">$</span><span class="nt">i</span> <span class="o">+</span> <span class="nt">1</span><span class="o">;</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>@each</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">$</span><span class="nt">i</span><span class="o">:</span> <span class="nt">1</span><span class="o">;</span>
+</span><span class='line'><span class="k">@each</span> <span class="o">$</span><span class="nt">item</span> <span class="nt">in</span> <span class="nt">add</span><span class="o">,</span> <span class="nt">update</span><span class="o">,</span> <span class="nt">remove</span><span class="o">,</span> <span class="nt">share</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nc">.icon-</span><span class="err">#</span><span class="p">{</span><span class="err">$</span><span class="n">item</span><span class="p">}</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">background-image</span><span class="o">:</span> <span class="sx">url(&quot;/image/#{$item}.jpg&quot;)</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>7. 自定义函数</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='CSS'><span class='line'><span class="k">@function</span> <span class="nt">double</span><span class="o">($</span><span class="nt">n</span><span class="o">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">@return</span> <span class="o">$</span><span class="nt">n</span> <span class="o">*</span> <span class="nt">2</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nf">#navbar</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">width</span><span class="o">:</span> <span class="k">double</span><span class="p">(</span><span class="m">5px</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>参考链接</h4>
+
+<ul>
+<li><a href="http://sass-lang.com/">sass 官网</a></li>
+<li><a href="https://juejin.im/entry/5a44404a51882560b6529af0">前端CSS的工程化——掌握Sass这四大特性就够了</a></li>
+<li><a href="http://www.imbeta.cn/sassyong-fa-jie-shao.html#sassyong-fa-jie-shao">SASS用法介绍</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[gulp]]></title>
